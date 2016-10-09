@@ -1,0 +1,17 @@
+/* This file is for your main application css. */
+#chat-container {
+    max-width: 512px;
+    margin: 0 auto;
+}
+.message-input {
+    max-width: 350px;
+}
+.sk-logo {
+    display:none;
+}
+#sk-container {
+    max-width: 512px !important;
+}
+.container {
+    padding: 0 !important;
+}
