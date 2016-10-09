@@ -1,7 +1,6 @@
 defmodule Tboechatbot.Bookbuilding do
     def create_book(params) do
 
-
           params = Map.merge(%{
             "occasion" => "current",
             "relationship" => "friends",
@@ -81,7 +80,7 @@ defmodule Tboechatbot.Bookbuilding do
             "/get/book",
             {:form, customer_data},
             %{"Content-type" => "application/x-www-form-urlencoded"},
-            [ recv_timeout: 50000 ]
+            [ recv_timeout: 50_000 ]
           ).body
            Application.get_env(:tboechatbot, :bookbuilder_url) <> String.lstrip(book["unique_id"], ?#)
     end
