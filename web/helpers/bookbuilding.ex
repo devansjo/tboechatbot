@@ -9,7 +9,7 @@ defmodule Tboechatbot.Bookbuilding do
 
           user_id = 165
           dob_month = params["dob_month"]
-              |> downcase
+              |> String.downcase
               |> String.replace("january", "1") #make case insensitive
               |> String.replace("february", "2")
               |> String.replace("march", "3")
@@ -24,7 +24,7 @@ defmodule Tboechatbot.Bookbuilding do
               |> String.replace("december", "12")
 
           dob_day = params["dob_day"]
-              |> downcase
+              |> String.downcase
               |> String.replace("first", "1") #make case insensitive
               |> String.replace("second", "2")
               |> String.replace("third", "3")
@@ -36,7 +36,7 @@ defmodule Tboechatbot.Bookbuilding do
               |> String.replace("ninth", "9")
               |> String.replace("tenth", "10") #etc etc
               |> String.replace("st", "")
-              |> String.replace("nd", ""
+              |> String.replace("nd", "")
               |> String.replace("rd", "")
               |> String.replace("th", "")
 
