@@ -42,7 +42,8 @@ defmodule Tboechatbot.Mixfile do
      {:httpoison, "~> 0.9.0"},
      {:httpotion, "~> 3.0.0"},
      {:redix, ">= 0.0.0"},
-     {:timex, "~> 2.2.1"}]
+     {:timex, "~> 2.2.1"},
+     {:credo, "~> 0.4", only: [:dev, :test]}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
