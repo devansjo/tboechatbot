@@ -196,7 +196,7 @@ defmodule Tboechatbot.ConversationRepo do
     def find_next_context(conversation) do
         index =  Enum.find_index(
                   conversation.steps,
-                  fn(%Tboechatbot.ConversationStep{context: context, value: value}) ->
+                  fn(%Tboechatbot.ConversationStep{context: _, value: value}) ->
                       value == 0
                   end
                 )
@@ -215,7 +215,7 @@ defmodule Tboechatbot.ConversationRepo do
         )
     end
 
-    def update_step(steps, context, value) when context == "start_again" do
+    def update_step(_steps, context, _value) when context == "start_again" do
         conversation = get_conversation("define_product", "", "")
         conversation.steps
     end

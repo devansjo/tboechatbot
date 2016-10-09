@@ -14,7 +14,7 @@ defmodule Tboechatbot.ConversationController do
 
   def new(conn, _params) do
     user_id = conn.assigns.user_id
-    {reply, conversation} = {[], ConversationRepo.initialise_conversation(user_id)}
+    {reply, _} = {[], ConversationRepo.initialise_conversation(user_id)}
         |> add_message("open")
         |> add_message("for1")
     render conn, "response.json", response: %{user_id: user_id, reply: reply}
