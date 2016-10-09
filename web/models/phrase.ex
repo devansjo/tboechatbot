@@ -18,7 +18,7 @@ defmodule Tboechatbot.Phrase do
 
   defstruct [
         :context,
-        :en_UK,
+        :en_GB,
         :en_US,
         :actions
       ]

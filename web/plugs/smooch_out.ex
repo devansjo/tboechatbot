@@ -11,7 +11,7 @@ defmodule Tboechatbot.SmoochOut do
           case response_map do
             %{"response" => %{"user_id" => user_id, "reply" => reply}}
                 ->  #send each message in list to smooch
-                    case Enum.all?(reply, fn(message) -> smooch(user_id, message["en_UK"], message["actions"]) end) do
+                    case Enum.all?(reply, fn(message) -> smooch(user_id, message["en_GB"], message["actions"]) end) do
                       true  -> resp(conn, 204, "")
                       false -> resp(conn, 500, "Smooch unavailable or there was an error in reply")
                     end

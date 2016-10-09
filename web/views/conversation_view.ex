@@ -16,7 +16,7 @@ defmodule Tboechatbot.ConversationView do
    %{
       id: phrase.id,
       context: phrase.context,
-      en_UK: phrase.en_UK
+      en_GB: phrase.en_GB
     }
   end
 

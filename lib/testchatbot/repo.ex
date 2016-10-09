@@ -4,9 +4,9 @@ defmodule Tboechatbot.PhraseRepo do
 """
     def all() do
       [
-        %Tboechatbot.Phrase{ context: "open", en_UK: "¡Hola! I am the test chatbot. We are going to make a book." },
-        %Tboechatbot.Phrase{ context: "open", en_UK: "What's up? I am the test chatbot. I am going to help you write a book." },
-        %Tboechatbot.Phrase{ context: "for1", en_UK: "Firstly, who is the book for?", actions: [
+        %Tboechatbot.Phrase{ context: "open", en_GB: "¡Hola! I am the test chatbot. We are going to make a book." },
+        %Tboechatbot.Phrase{ context: "open", en_GB: "What's up? I am the test chatbot. I am going to help you write a book." },
+        %Tboechatbot.Phrase{ context: "for1", en_GB: "Firstly, who is the book for?", actions: [
             %{"type": "postback", "text": "A friend", "payload": "friend" },
             %{"type": "postback", "text": "Boyfriend", "payload": "boyfriend"},
             %{"type": "postback", "text": "Girlfriend", "payload": "girlfriend"},
@@ -14,39 +14,39 @@ defmodule Tboechatbot.PhraseRepo do
             %{"type": "postback", "text": "Dad", "payload": "dad"},
             %{"type": "postback", "text": "Show me more options", "payload": "for2"}
         ] },
-        %Tboechatbot.Phrase{ context: "for2", en_UK: "So maybe one of the following?", actions: [
+        %Tboechatbot.Phrase{ context: "for2", en_GB: "So maybe one of the following?", actions: [
             %{"type": "postback", "text": "Husband", "payload": "husband" },
             %{"type": "postback", "text": "Wife", "payload": "wife"},
             %{"type": "postback", "text": "Work colleague", "payload": "colleague"},
             %{"type": "postback", "text": "A relative", "payload": "relative"},
             %{"type": "postback", "text": "Other", "payload": "friend"}
         ] },
-        %Tboechatbot.Phrase{ context: "from", en_UK: "Who is the book from? Your name, please."},
-        %Tboechatbot.Phrase{ context: "first_name", en_UK: "What is the first name of the person you want to make a book for?" },
-        %Tboechatbot.Phrase{ context: "last_name", en_UK: "And what is the last name?" },
-        %Tboechatbot.Phrase{ context: "dob_year", en_UK: "We need ###FIRSTNAME###'s birthday. What year were they born in?" },
-        %Tboechatbot.Phrase{ context: "dob_month", en_UK: "And the month were they born?" },
-        %Tboechatbot.Phrase{ context: "dob_day", en_UK: "And what day of the month?" },
-        %Tboechatbot.Phrase{ context: "gender", en_UK: "Are they male or female?", actions: [
+        %Tboechatbot.Phrase{ context: "from", en_GB: "Who is the book from? Your name, please."},
+        %Tboechatbot.Phrase{ context: "first_name", en_GB: "What is the first name of the person you want to make a book for?" },
+        %Tboechatbot.Phrase{ context: "last_name", en_GB: "And what is the last name?" },
+        %Tboechatbot.Phrase{ context: "dob_year", en_GB: "We need ###FIRSTNAME###'s birthday. What year were they born in?" },
+        %Tboechatbot.Phrase{ context: "dob_month", en_GB: "And the month were they born?" },
+        %Tboechatbot.Phrase{ context: "dob_day", en_GB: "And what day of the month?" },
+        %Tboechatbot.Phrase{ context: "gender", en_GB: "Are they male or female?", actions: [
             %{"type": "postback", "text": "Male", "payload": "m" },
             %{"type": "postback", "text": "Female", "payload": "f"}
         ] },
-        %Tboechatbot.Phrase{ context: "occasion", en_UK: "Is this a birthday present?", actions: [
+        %Tboechatbot.Phrase{ context: "occasion", en_GB: "Is this a birthday present?", actions: [
             %{"type": "postback", "text": "Yes", "payload": "next" },
             %{"type": "postback", "text": "No", "payload": "current"}
         ] },
-        %Tboechatbot.Phrase{ context: "encourage", en_UK: "Great!" },
-        %Tboechatbot.Phrase{ context: "encourage", en_UK: "Good!" },
-        %Tboechatbot.Phrase{ context: "encourage", en_UK: "Woot!" },
-        %Tboechatbot.Phrase{ context: "encourage", en_UK: "Got it!" },
-        %Tboechatbot.Phrase{ context: "encourage", en_UK: "Roger that!" },
-        %Tboechatbot.Phrase{ context: "joke", en_UK: "A man walked into a bar... Ouch! It was an iron bar." },
-        %Tboechatbot.Phrase{ context: "evade", en_UK: "I'm sorry. I don't understand that request." },
-        %Tboechatbot.Phrase{ context: "evade", en_UK: "Hey! I'm asking the questions here!'" },
-        %Tboechatbot.Phrase{ context: "close", en_UK: "Here is a link to your book. ¡Hasta luego! ###BOOKLINK###" },
-        %Tboechatbot.Phrase{ context: "start_again", en_UK: "Refresh the page to start the conversation again" },
-        %Tboechatbot.Phrase{ context: "faq_prices", en_UK: "I would tell you about prices now but I need to copy the info from the website and haven't done that yet." },
-        %Tboechatbot.Phrase{ context: "faq_delivery", en_UK: "I would tell you about delivery times now but I need to copy the info from the website and haven't done that yet." }
+        %Tboechatbot.Phrase{ context: "encourage", en_GB: "Great!" },
+        %Tboechatbot.Phrase{ context: "encourage", en_GB: "Good!" },
+        %Tboechatbot.Phrase{ context: "encourage", en_GB: "Woot!" },
+        %Tboechatbot.Phrase{ context: "encourage", en_GB: "Got it!" },
+        %Tboechatbot.Phrase{ context: "encourage", en_GB: "Roger that!" },
+        %Tboechatbot.Phrase{ context: "joke", en_GB: "A man walked into a bar... Ouch! It was an iron bar." },
+        %Tboechatbot.Phrase{ context: "evade", en_GB: "I'm sorry. I don't understand that request." },
+        %Tboechatbot.Phrase{ context: "evade", en_GB: "Hey! I'm asking the questions here!'" },
+        %Tboechatbot.Phrase{ context: "close", en_GB: "Here is a link to your book. ¡Hasta luego! ###BOOKLINK###" },
+        %Tboechatbot.Phrase{ context: "start_again", en_GB: "Refresh the page to start the conversation again" },
+        %Tboechatbot.Phrase{ context: "faq_prices", en_GB: "I would tell you about prices now but I need to copy the info from the website and haven't done that yet." },
+        %Tboechatbot.Phrase{ context: "faq_delivery", en_GB: "I would tell you about delivery times now but I need to copy the info from the website and haven't done that yet." }
       ]
       |> Enum.shuffle
     end

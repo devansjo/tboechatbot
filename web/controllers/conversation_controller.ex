@@ -87,28 +87,28 @@ defmodule Tboechatbot.ConversationController do
 
   defp replace_generic(phrase, conversation) do
    cond do
-        String.contains? phrase.en_UK, "###" ->
-            updated_en_UK = phrase.en_UK
+        String.contains? phrase.en_GB, "###" ->
+            updated_en_GB = phrase.en_GB
                 |> String.replace("###FROMNAME###", ConversationRepo.who_from(conversation))
                 |> String.replace("###FIRSTNAME###", ConversationRepo.who_to(conversation))
 #            updated_en_US = phrase.en_US
 #                |> String.replace("###FROMNAME###", ConversationRepo.who_from(conversation))
 #                |> String.replace("###FIRSTNAME###", ConversationRepo.who_to(conversation))
-            %{ phrase | en_UK: updated_en_UK}
+            %{ phrase | en_GB: updated_en_GB}
         true -> phrase
    end
   end
 
   defp replace_booklink(phrase, conversation) do
     cond do
-        String.contains? phrase.en_UK, "###BOOKLINK###" ->
+        String.contains? phrase.en_GB, "###BOOKLINK###" ->
             book_link = conversation.steps
                 |> flatten_map
                 |> create_book
-            updated_en_UK = phrase.en_UK
+            updated_en_GB = phrase.en_GB
                 |> String.replace("###BOOKLINK###", book_link)
 #            updated_en_US = phrase.en_US |> String.replace("###BOOKLINK###", book_link)
-            %{ phrase | en_UK: updated_en_UK}
+            %{ phrase | en_GB: updated_en_GB}
         true -> phrase
     end
   end
