@@ -8,38 +8,10 @@ defmodule Tboechatbot.Bookbuilding do
           }, params)
 
           user_id = 165
-          dob_month = params["dob_month"]
-              |> String.downcase
-              |> String.replace("january", "1") #make case insensitive
-              |> String.replace("february", "2")
-              |> String.replace("march", "3")
-              |> String.replace("april", "4")
-              |> String.replace("may", "5")
-              |> String.replace("june", "6")
-              |> String.replace("july", "7")
-              |> String.replace("august", "8")
-              |> String.replace("september", "9")
-              |> String.replace("october", "10")
-              |> String.replace("november", "11")
-              |> String.replace("december", "12")
-
-          dob_day = params["dob_day"]
-              |> String.downcase
-              |> String.replace("first", "1") #make case insensitive
-              |> String.replace("second", "2")
-              |> String.replace("third", "3")
-              |> String.replace("fourth", "4")
-              |> String.replace("fifth", "5")
-              |> String.replace("sixth", "6")
-              |> String.replace("seventh", "7")
-              |> String.replace("eighth", "8")
-              |> String.replace("ninth", "9")
-              |> String.replace("tenth", "10") #etc etc
-              |> String.replace("st", "")
-              |> String.replace("nd", "")
-              |> String.replace("rd", "")
-              |> String.replace("th", "")
-
+          dob_month = get_month(params["dob_month"])
+          IO.puts dob_month
+          dob_day = get_day(params["dob_day"])
+          IO.puts dob_day
           { :ok, publication_date } = case params["occasion"] do
             "current" -> Timex.Date.now
             "next" -> get_next_birthday(dob_month, dob_day)
@@ -98,7 +70,28 @@ defmodule Tboechatbot.Bookbuilding do
             _ -> birthday_next_year
         end
     end
+
+    defp get_month(month) do
+        case {Timex.Parse.DateTime.Parser.parse(month, "{M}"), Timex.Parse.DateTime.Parser.parse(String.capitalize(month), "{%B}", :strftime)} do
+            {{:ok, date}, _} -> date.month
+            {_, {:ok, date}} -> date.month
+            _ -> false
+        end
+    end
+
+    defp get_day(day) do
+        day = day
+        |> String.replace("st", "")
+        |> String.replace("nd", "")
+        |> String.replace("rd", "")
+        |> String.replace("th", "")
+        case Timex.Parse.DateTime.Parser.parse(day, "%d", :strftime) do
+            {:ok, date} -> date.day
+            _ -> false
+        end
+    end
 end
+
 
 defmodule Crypto do
   def md5(nil), do: md5("")
