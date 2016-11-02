@@ -11,10 +11,10 @@ defmodule Tboechatbot.SmoochOut do
           case response_map do
             %{"response" => %{"user_id" => user_id, "reply" => reply}}
                 ->  #send each message in list to smooch
-                    case Enum.all?(reply, fn(message) -> smooch(user_id, message["en_GB"], message["actions"]) end) do
-                      true  -> resp(conn, 204, "")
-                      false -> resp(conn, 500, "Smooch unavailable or there was an error in reply")
-                    end
+#                    case Enum.all?(reply, fn(message) -> send_message(user_id, message["en_GB"], message["actions"], message["items"]) end) do
+#                      true  -> resp(conn, 204, "")
+#                      false -> resp(conn, 500, "Smooch unavailable or there was an error in reply")
+#                    end
                      conn
             %{"response" => _}
                 ->  conn
@@ -23,15 +23,35 @@ defmodule Tboechatbot.SmoochOut do
         end)
   end
 
-  defp smooch(user_id, thing_to_say, actions) do
-    jwt = Application.get_env(:tboechatbot, :smooch_api_jwt)
-    smooch_api_url = Application.get_env(:tboechatbot, :smooch_api_url)
+  defp send_message(user_id, thing_to_say, actions, _items) when actions != nil do
     message = %{
             "text": thing_to_say,
             "role": "appMaker",
-            "actions": actions || []
+            "actions": actions
         }
         |> Poison.encode!
+  end
+
+  defp send_message(user_id, thing_to_say, _actions, items) when items != nil do
+    message = %{
+            "text": thing_to_say,
+            "role": "appMaker",
+            "items": items
+        }
+        |> Poison.encode!
+  end
+
+  defp send_message(user_id, thing_to_say, _actions, _items) do
+    message = %{
+            "text": thing_to_say,
+            "role": "appMaker"
+        }
+        |> Poison.encode!
+  end
+
+  defp smooch(user_id, message) do
+    jwt = Application.get_env(:tboechatbot, :smooch_api_jwt)
+    smooch_api_url = Application.get_env(:tboechatbot, :smooch_api_url)
     smooched_it = HTTPotion.post smooch_api_url <> "/appusers/" <> (user_id |> to_string) <> "/messages", [body: message, headers: ["Authorization": "Bearer " <> jwt, "Content-Type": "application/json"]]
     case smooched_it do
       %{status_code: 201} ->
