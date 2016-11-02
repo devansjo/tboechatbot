@@ -1,0 +1,17 @@
+<header class="main-header">
+  <div class="toggle-wrapper">
+    <button class="menu-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+  <div class="heading">
+    <a href="/" class="tboe-logo">
+      the book of everyone
+    </a>
+  </div>
+  <nav class="megamenu">
+    <%= render Tboechatbot.LayoutView, "main_menu.html", assigns %>
+  </nav>
+</header>

@@ -1,0 +1,54 @@
+<footer class="main-footer">
+  <div class="wrapper-narrow">
+    <div class="row">
+      <div class="medium-6">
+        <section class="newsletter">
+          <p class="title">Sign up</p>
+          <small>For our mildly entertaining newsletter</small>
+          <br><br>
+          <form class="form" action="//thebookofeveryone.us3.list-manage.com/subscribe/post?u=dbdf32ca8b6345286a8f479b6&id=0e18128931" method="POST">
+            <div class="group">
+              <input type="hidden" name="subscribe" value="1">
+              <div data-component="Components.Input" data-name="EMAIL" data-constraints='[
+                { "pattern": "^.+@.+\\..+$", "message": "Please introduce a valid email" },
+                { "pattern": "^.+$", "message": "Required field" }
+               ]'>
+            </div>
+            <button class="btn">join</button>
+          </form>
+        </section>
+        <section class="social-links">
+          <ul class="row">
+            <li class="extra-small-3"><a target="_blank" href="https://www.facebook.com/bookofeveryone"><i class="fa fa-facebook"></i></a></li>
+            <li class="extra-small-3"><a target="_blank" href="https://twitter.com/bookofeveryone"><i class="fa fa-twitter"></i></a></li>
+            <li class="extra-small-3"><a target="_blank" href="https://www.instagram.com/bookofeveryone/"><i class="fa fa-instagram"></i></a></li>
+            <li class="extra-small-3"><a target="_blank" href="https://www.pinterest.com/bookofeveryone/"><i class="fa fa-pinterest"></i></a></li>
+          </ul>
+          <a target="_blank" href="https://www.instagram.com/explore/tags/thebookofeveryone/">#thebookofeveryone</a>
+        </section>
+      </div>
+      <div class="medium-6">
+        <section class="menu">
+          <ul>
+            <li>
+              <a target="_blank" href="https://thebookofeveryone.zendesk.com">FAQ</a>
+            </li>
+            <li>
+              <a target="_blank" href="http://thebookofeveryone.studentbeans.com">Students</a>
+            </li>
+            <li>
+              <a target="_blank" href="https://thebookofeveryone.workable.com">Careers</a>
+            </li>
+            <li>
+              <a target="_blank" href="https://thebookofeveryone.zendesk.com">Contact us</a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <p class="copyright">
+      &copy; <%= Timex.Date.now |> Timex.Format.DateTime.Formatter.format!("{YYYY}") %>
+      The Book of Everyone
+    </p>
+  </div>
+</footer>

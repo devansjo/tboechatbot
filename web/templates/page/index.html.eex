@@ -1,2 +1,8 @@
-<div id="chat-container">
+
+<section class="artists">
+    <div class="wrapper">
+        <h1>LET'S TALK</h1>
+        <div id="chat-container">
+        </div>
     </div>
+</section>
