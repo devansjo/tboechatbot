@@ -20,6 +20,7 @@ defmodule Tboechatbot.Phrase do
         :context,
         :en_GB,
         :en_US,
-        :actions
+        :actions,
+        :items
       ]
 end
