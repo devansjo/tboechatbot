@@ -51,10 +51,26 @@ defmodule Tboechatbot.ConversationController do
                       |> add_message("joke")
                       |> repeat_the_question
                       |> remove_placeholders
+        they_said |> hey_im_matt(conversation)
+                ->    { reply, conversation }
+                      |> add_message("hello")
+                      |> add_message("flip_off")
+                      |> repeat_the_question
+                      |> remove_placeholders
+        they_said |> fails_validation(conversation)
+                ->    { reply, conversation }
+                      |> add_message(ConversationRepo.find_current_context(conversation) <> "_validation_tip")
+                      |> repeat_the_question
+                      |> remove_placeholders
         they_said
                 ->    { reply, conversation }
                       |> add_message("encourage")
                       |> ask_next_question(they_said)
+                      |> remove_placeholders
+        true
+                ->    { reply, conversation }
+                      |> add_message("fail")
+                      |> repeat_the_question
                       |> remove_placeholders
     end
   end
@@ -75,44 +91,6 @@ defmodule Tboechatbot.ConversationController do
     { reply, conversation }
   end
 
-  defp remove_placeholders({phrases, conversation}) do
-    reply = Enum.reduce(phrases, [], fn(phrase, acc) ->
-            updated_phrase = phrase
-                |> replace_generic(conversation)
-                |> replace_booklink(conversation)
-            List.insert_at(acc, -1, updated_phrase)
-    end)
-    { reply, conversation }
-  end
-
-  defp replace_generic(phrase, conversation) do
-   cond do
-        String.contains? phrase.en_GB, "###" ->
-            updated_en_GB = phrase.en_GB
-                |> String.replace("###FROMNAME###", ConversationRepo.who_from(conversation))
-                |> String.replace("###FIRSTNAME###", ConversationRepo.who_to(conversation))
-#            updated_en_US = phrase.en_US
-#                |> String.replace("###FROMNAME###", ConversationRepo.who_from(conversation))
-#                |> String.replace("###FIRSTNAME###", ConversationRepo.who_to(conversation))
-            %{ phrase | en_GB: updated_en_GB}
-        true -> phrase
-   end
-  end
-
-  defp replace_booklink(phrase, conversation) do
-    cond do
-        String.contains? phrase.en_GB, "###BOOKLINK###" ->
-            book_link = conversation.steps
-                |> flatten_map
-                |> create_book
-            updated_en_GB = phrase.en_GB
-                |> String.replace("###BOOKLINK###", book_link)
-#            updated_en_US = phrase.en_US |> String.replace("###BOOKLINK###", book_link)
-            %{ phrase | en_GB: updated_en_GB}
-        true -> phrase
-    end
-  end
-
   defp update_conversation(conversation, they_said) do
     Enum.find_value(conversation.steps, conversation, fn(step) ->
       case step do
@@ -131,4 +109,40 @@ defmodule Tboechatbot.ConversationController do
     end)
   end
 
+  defp remove_placeholders({phrases, conversation}) do
+    reply = Enum.reduce(phrases, [], fn(phrase, acc) ->
+            updated_phrase = phrase
+                |> replace_generic(conversation)
+                |> replace_booklink(conversation)
+            List.insert_at(acc, -1, updated_phrase)
+    end)
+    { reply, conversation }
+  end
+
+  defp replace_generic(phrase, conversation) do
+  IO.puts phrase.en_GB
+   cond do
+        phrase.en_GB == nil -> phrase
+        String.contains? phrase.en_GB, "###" ->
+            updated_en_GB = phrase.en_GB
+                |> String.replace("###FROMNAME###", ConversationRepo.who_from(conversation))
+                |> String.replace("###FIRSTNAME###", ConversationRepo.who_to(conversation))
+            %{ phrase | en_GB: updated_en_GB}
+        true -> phrase
+   end
+  end
+
+  defp replace_booklink(phrase, conversation) do
+    cond do
+        phrase.en_GB == nil -> phrase
+        String.contains? phrase.en_GB, "###BOOKLINK###" ->
+            book_link = conversation.steps
+                |> flatten_map
+                |> create_book
+            updated_en_GB = phrase.en_GB
+                |> String.replace("###BOOKLINK###", book_link)
+            %{ phrase | en_GB: updated_en_GB}
+        true -> phrase
+    end
+  end
 end
