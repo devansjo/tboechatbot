@@ -1,33 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>The Book of Everyone - Let's talk</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
-
-  <body>
-    <div class="container">
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <script src="https://cdn.smooch.io/smooch.min.js"></script>
-    <script>
-      var skPromise = Smooch.init({
-        appToken: 'apqj90hg11umriffcefcurzem',
-        embedded: true,
-        //jwt: "",
-        userId: '<%= @user_id %>'
-      });
-      Smooch.render(document.getElementById('chat-container'));
-      skPromise.then(function() {
-         //Smooch.sendMessage('Hi TBOE. I want to make a book!', '<%= @user_id %>');
-         $.get( "<%= @chat_api_url %>/conversation/new", { user_id: '<%= @user_id %>'} );
-      });
-    </script>
-  </body>
+<html lang="en-GB" class="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+  <link rel="publisher" href="https://plus.google.com/+Thebookofeveryone/" />
+  <meta property="fb:app_id" content="596500807086800" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:site" content="@bookofeveryone" />
+  <meta property="twitter:title" content="The Book of Everyone" />
+  <meta property="twitter:description" content="Make a personalised book celebrating someone's life" />
+  <meta property="og:url" content="<%= url(@conn) <> @conn.request_path %>" />
+  <meta property="og:title" content="Make a personalised book. A unique gift idea for him & her!" />
+  <meta property="og:description" content="Create a beautifully designed, personalised gift book celebrating someone\'s life, based on their birth date. Make a book in only 40 seconds!" />
+  <meta property="og:type" content="product" />
+  <meta property="og:site_name" content="The Book of Everyone" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <link rel="shortcut icon" sizes="64x64" type="image/png" href="/favicon-64.png">
+  <link rel="shortcut icon" sizes="32x32" type="image/png" href="/favicon-32.png">
+  <link rel="shortcut icon" sizes="16x16" type="image/png" href="/favicon-16.png">
+  <title>TBOE Chatbot</title>
+  <link rel="stylesheet" href="https://dmwtc4afbu6an.cloudfront.net/css/app-bed7d5fff97c3a0e37ca5363388fb697.css?vsn=d">
+  <style>
+    #chat-container {
+      height: 300px;
+      margin-bottom: 200px;
+    }
+    .sk-logo {
+      display: none;
+    }
+    #sk-container {
+      /*max-width: 600px !important;*/
+    }
+    .sk-intro-section {
+      display: none;
+    }
+    #sk-container.sk-embedded #sk-conversation .sk-messages {
+      text-align: left;
+    }
+  </style>
+</head>
+<body class="homepage">
+<main class="main">
+  <%= render_existing Tboechatbot.LayoutView, @header, assigns %>
+  <div class="container">
+        <%= render @view_module, @view_template, assigns %>
+  </div><!-- /container -->
+</main>
+<%= render_existing Tboechatbot.LayoutView, @footer, assigns %>
+<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+<script src="https://cdn.smooch.io/smooch.min.js"></script>
+<script>
+  var skPromise = Smooch.init({
+    appToken: 'apqj90hg11umriffcefcurzem',
+    embedded: true,
+    //jwt: "",
+    userId: '<%= @user_id %>',
+    customText: {
+      headerText: '',
+      inputPlaceholder: 'Type a message...',
+      sendButtonText: 'Send',
+      introductionText: 'The Book of Everyone Chatbot',
+      introAppText: 'Message us below or from your favorite app.',
+      settingsText: 'You can leave us your email so that we can get back to you this way.',
+      settingsReadOnlyText: 'We\'ll get back to you at this email address if we missed you.',
+      settingsInputPlaceholder: 'Your email address',
+      settingsSaveButtonText: 'Save',
+      settingsHeaderText: 'Settings',
+      actionPostbackError: 'An error occurred while processing your action. Please try again.',
+      messageError: 'An error occured while sending your message. Please try again.',
+    }
+  });
+  Smooch.render(document.getElementById('chat-container'));
+  skPromise.then(function() {
+    $.get( "<%= @chat_api_url %>/conversation/new", { user_id: '<%= @user_id %>'} );
+  });
+</script>
+</body>
 </html>
+
+
