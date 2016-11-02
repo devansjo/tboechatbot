@@ -6,6 +6,7 @@ defmodule Tboechatbot.PhraseRepo do
       [
         %Tboechatbot.Phrase{ context: "open", en_GB: "¡Hola! I am the test chatbot. We are going to make a book." },
         %Tboechatbot.Phrase{ context: "open", en_GB: "What's up? I am the test chatbot. I am going to help you write a book." },
+        %Tboechatbot.Phrase{ context: "hello", en_GB: "Hey ###FROMNAME###" },
         %Tboechatbot.Phrase{ context: "for1", en_GB: "Firstly, who is the book for?", actions: [
             %{"type": "postback", "text": "A friend", "payload": "friend" },
             %{"type": "postback", "text": "Boyfriend", "payload": "boyfriend"},
@@ -23,10 +24,20 @@ defmodule Tboechatbot.PhraseRepo do
         ] },
         %Tboechatbot.Phrase{ context: "from", en_GB: "Who is the book from? Your name, please."},
         %Tboechatbot.Phrase{ context: "first_name", en_GB: "What is the first name of the person you want to make a book for?" },
+        %Tboechatbot.Phrase{ context: "first_name_validation_tip", en_GB: "The name needs to be less than 14 letters otherwise it won't fit :-(" },
+
         %Tboechatbot.Phrase{ context: "last_name", en_GB: "And what is the last name?" },
+        %Tboechatbot.Phrase{ context: "last_name_validation_tip", en_GB: "The name needs to be less than 14 letters otherwise it won't fit :-(" },
+
         %Tboechatbot.Phrase{ context: "dob_year", en_GB: "We need ###FIRSTNAME###'s birthday. What year were they born in?" },
-        %Tboechatbot.Phrase{ context: "dob_month", en_GB: "And the month were they born?" },
-        %Tboechatbot.Phrase{ context: "dob_day", en_GB: "And what day of the month?" },
+        %Tboechatbot.Phrase{ context: "dob_year_validation_tip", en_GB: "I'm sorry but I need a valid year e.g. 1985." },
+
+        %Tboechatbot.Phrase{ context: "dob_month", en_GB: "The month were they born?" },
+        %Tboechatbot.Phrase{ context: "dob_month_validation_tip", en_GB: "I'm sorry but I need a valid month, e.g. October or 10." },
+
+        %Tboechatbot.Phrase{ context: "dob_day", en_GB: "What day of the month?" },
+        %Tboechatbot.Phrase{ context: "dob_day_validation_tip", en_GB: "I'm sorry but I need a valid day, e.g. 1, 2 etc. " },
+
         %Tboechatbot.Phrase{ context: "gender", en_GB: "Are they male or female?", actions: [
             %{"type": "postback", "text": "Male", "payload": "m" },
             %{"type": "postback", "text": "Female", "payload": "f"}
@@ -41,12 +52,16 @@ defmodule Tboechatbot.PhraseRepo do
         %Tboechatbot.Phrase{ context: "encourage", en_GB: "Got it!" },
         %Tboechatbot.Phrase{ context: "encourage", en_GB: "Roger that!" },
         %Tboechatbot.Phrase{ context: "joke", en_GB: "A man walked into a bar... Ouch! It was an iron bar." },
+        %Tboechatbot.Phrase{ context: "flip_off", items: [
+            %{"title": "Title", "description": "Description", "mediaUrl": "http://example.org/image.jpg"}
+        ]},
         %Tboechatbot.Phrase{ context: "evade", en_GB: "I'm sorry. I don't understand that request." },
         %Tboechatbot.Phrase{ context: "evade", en_GB: "Hey! I'm asking the questions here!'" },
         %Tboechatbot.Phrase{ context: "close", en_GB: "Here is a link to your book. ¡Hasta luego! ###BOOKLINK###" },
         %Tboechatbot.Phrase{ context: "start_again", en_GB: "Refresh the page to start the conversation again" },
         %Tboechatbot.Phrase{ context: "faq_prices", en_GB: "I would tell you about prices now but I need to copy the info from the website and haven't done that yet." },
-        %Tboechatbot.Phrase{ context: "faq_delivery", en_GB: "I would tell you about delivery times now but I need to copy the info from the website and haven't done that yet." }
+        %Tboechatbot.Phrase{ context: "faq_delivery", en_GB: "I would tell you about delivery times now but I need to copy the info from the website and haven't done that yet." },
+        %Tboechatbot.Phrase{ context: "fail", en_GB: "Yeah, you got me. I'm just a chatbot and I have no idea what you just said or how it answers the question I asked. Let's try that again." }
       ]
       |> Enum.shuffle
     end
@@ -239,10 +254,10 @@ defmodule Tboechatbot.ConversationRepo do
     defp find_value_of_context(steps, context_to_find) do
         Enum.find_value(
             steps,
-            "thingummy",
+            "mate",
             fn(%Tboechatbot.ConversationStep{context: context, value: value}) ->
                 cond do
-                  context == context_to_find -> value
+                  context == context_to_find && is_binary(value) -> value
                   true -> false
                 end
             end
