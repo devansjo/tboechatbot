@@ -59,11 +59,12 @@ defmodule Tboechatbot.PhraseRepo do
         %Tboechatbot.Phrase{ context: "faq_prices", en_GB: "I would tell you about prices now but I need to copy the info from the website and haven't done that yet." },
         %Tboechatbot.Phrase{ context: "faq_delivery", en_GB: "I would tell you about delivery times now but I need to copy the info from the website and haven't done that yet." },
         %Tboechatbot.Phrase{ context: "fail", en_GB: "Yeah, you got me. I'm just a chatbot and I have no idea what you just said or how it answers the question I asked. Let's try that again." },
-        %Tboechatbot.Phrase{ context: "flip_off", items: [
-            %{"title": "Title", "description": "Description", "mediaUrl": "http://example.org/image.jpg", "actions": [
-                %{"text": "Select", "type": "postback", "payload": "TACOS"}
-             ]}
-         ]}
+        %Tboechatbot.Phrase{ context: "flip_off", en_GB: "U+261D (pending carousel implementation)" },
+#        %Tboechatbot.Phrase{ context: "flip_off", items: [
+#            %{"title": "Title", "description": "Description", "mediaUrl": "http://example.org/image.jpg", "actions": [
+#                %{"text": "Select", "type": "postback", "payload": "TACOS"}
+#             ]}
+#         ]}
       ]
       |> Enum.shuffle
     end
