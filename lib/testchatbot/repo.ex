@@ -52,16 +52,18 @@ defmodule Tboechatbot.PhraseRepo do
         %Tboechatbot.Phrase{ context: "encourage", en_GB: "Got it!" },
         %Tboechatbot.Phrase{ context: "encourage", en_GB: "Roger that!" },
         %Tboechatbot.Phrase{ context: "joke", en_GB: "A man walked into a bar... Ouch! It was an iron bar." },
-        %Tboechatbot.Phrase{ context: "flip_off", items: [
-            %{"title": "Title", "description": "Description", "mediaUrl": "http://example.org/image.jpg"}
-        ]},
         %Tboechatbot.Phrase{ context: "evade", en_GB: "I'm sorry. I don't understand that request." },
         %Tboechatbot.Phrase{ context: "evade", en_GB: "Hey! I'm asking the questions here!'" },
         %Tboechatbot.Phrase{ context: "close", en_GB: "Here is a link to your book. ¡Hasta luego! ###BOOKLINK###" },
         %Tboechatbot.Phrase{ context: "start_again", en_GB: "Refresh the page to start the conversation again" },
         %Tboechatbot.Phrase{ context: "faq_prices", en_GB: "I would tell you about prices now but I need to copy the info from the website and haven't done that yet." },
         %Tboechatbot.Phrase{ context: "faq_delivery", en_GB: "I would tell you about delivery times now but I need to copy the info from the website and haven't done that yet." },
-        %Tboechatbot.Phrase{ context: "fail", en_GB: "Yeah, you got me. I'm just a chatbot and I have no idea what you just said or how it answers the question I asked. Let's try that again." }
+        %Tboechatbot.Phrase{ context: "fail", en_GB: "Yeah, you got me. I'm just a chatbot and I have no idea what you just said or how it answers the question I asked. Let's try that again." },
+        %Tboechatbot.Phrase{ context: "flip_off", items: [
+            %{"title": "Title", "description": "Description", "mediaUrl": "http://example.org/image.jpg", "actions": [
+                %{"text": "Select", "type": "postback", "payload": "TACOS"}
+             ]}
+         ]}
       ]
       |> Enum.shuffle
     end

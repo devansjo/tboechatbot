@@ -39,6 +39,7 @@ defmodule Tboechatbot.SmoochOut do
             "items": items
         }
         |> Poison.encode!
+        IO.inspect message
     smooch(user_id, message)
   end
 
