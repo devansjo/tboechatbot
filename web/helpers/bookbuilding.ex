@@ -9,9 +9,7 @@ defmodule Tboechatbot.Bookbuilding do
 
           user_id = 165
           dob_month = get_month(params["dob_month"])
-          IO.puts dob_month
           dob_day = get_day(params["dob_day"])
-          IO.puts dob_day
           { :ok, publication_date } = case params["occasion"] do
             "current" -> Timex.Date.now
             "next" -> get_next_birthday(dob_month, dob_day)
@@ -72,9 +70,9 @@ defmodule Tboechatbot.Bookbuilding do
     end
 
     defp get_month(month) do
-        case {Timex.Parse.DateTime.Parser.parse(month, "{M}"), Timex.Parse.DateTime.Parser.parse(String.capitalize(month), "{%B}", :strftime)} do
-            {{:ok, date}, _} -> date.month
-            {_, {:ok, date}} -> date.month
+        case {Timex.Parse.DateTime.Parser.parse(month, "{M}"), Timex.Parse.DateTime.Parser.parse(String.capitalize(month), "%B", :strftime)} do
+            {{:ok, date}, _} -> Integer.to_string(date.month)
+            {_, {:ok, date}} -> Integer.to_string(date.month)
             _ -> false
         end
     end
@@ -85,8 +83,8 @@ defmodule Tboechatbot.Bookbuilding do
         |> String.replace("nd", "")
         |> String.replace("rd", "")
         |> String.replace("th", "")
-        case Timex.Parse.DateTime.Parser.parse(day, "%d", :strftime) do
-            {:ok, date} -> date.day
+        case Timex.Parse.DateTime.Parser.parse(day, "%e", :strftime) do
+            {:ok, date} -> Integer.to_string(date.day)
             _ -> false
         end
     end
