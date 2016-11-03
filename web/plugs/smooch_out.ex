@@ -33,6 +33,8 @@ defmodule Tboechatbot.SmoochOut do
   end
 
   defp send_message(user_id, thing_to_say, _actions, items) when items != nil do
+  IO.puts "items"
+  IO.inspect items
     message = %{
             "text": thing_to_say,
             "role": "appMaker",
