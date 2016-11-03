@@ -59,7 +59,7 @@ defmodule Tboechatbot.Listening do
     end
 
     defp valid_month(month) do
-        case {Timex.Parse.DateTime.Parser.parse(month, "{M}"), Timex.Parse.DateTime.Parser.parse(String.capitalize(month), "{%B}", :strftime)} do
+        case {Timex.Parse.DateTime.Parser.parse(month, "{M}"), Timex.Parse.DateTime.Parser.parse(String.capitalize(month), "%B", :strftime)} do
             {{:ok, _}, _} -> true
             {_, {:ok, _}} -> true
             _ -> false
@@ -72,7 +72,7 @@ defmodule Tboechatbot.Listening do
         |> String.replace("nd", "")
         |> String.replace("rd", "")
         |> String.replace("th", "")
-        case Timex.Parse.DateTime.Parser.parse(day, "%d", :strftime) do
+        case Timex.Parse.DateTime.Parser.parse(day, "%e", :strftime) do
             {:ok, _} -> true
             _ -> false
         end
