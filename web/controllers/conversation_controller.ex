@@ -53,7 +53,6 @@ defmodule Tboechatbot.ConversationController do
                       |> remove_placeholders
         they_said |> hey_im_matt(conversation)
                 ->    { reply, conversation }
-                      |> add_message("hello")
                       |> add_message("flip_off")
                       |> repeat_the_question
                       |> remove_placeholders
