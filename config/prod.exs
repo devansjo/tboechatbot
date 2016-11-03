@@ -94,4 +94,6 @@ config :tboechatbot,
     smooch_api_jwt: System.get_env("SMOOCH_API_JWT"),
     smooch_app_token: System.get_env("SMOOCH_APP_TOKEN"),
     smooch_api_url: System.get_env("SMOOCH_API_URL"),
-    api_url: System.get_env("API_URL")
+    chat_api_url: System.get_env("CHAT_API_URL"),
+    legacy_api_url: System.get_env("LEGACY_API_URL"),
+    bookbuilder_url: System.get_env("BOOKBUILDER_URL")
