@@ -4,7 +4,7 @@ defmodule LegacyApi do
   require Logger
 
   def process_url(url) do
-    Application.get_env(:tboechatbot, :api_url) <> url
+    Application.get_env(:tboechatbot, :legacy_api_url) <> url
   end
 
   def process_response_body(body) do
