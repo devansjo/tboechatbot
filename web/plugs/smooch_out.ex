@@ -23,6 +23,7 @@ defmodule Tboechatbot.SmoochOut do
   end
 
   defp send_message(user_id, thing_to_say, actions, _items) when actions != nil do
+  IO.puts "hi send action"
     message = %{
             "text": thing_to_say,
             "role": "appMaker",
@@ -32,6 +33,7 @@ defmodule Tboechatbot.SmoochOut do
   end
 
   defp send_message(user_id, thing_to_say, _actions, items) when items != nil do
+  IO.puts "hi send items"
     message = %{
             "text": thing_to_say,
             "role": "appMaker",
@@ -41,6 +43,7 @@ defmodule Tboechatbot.SmoochOut do
   end
 
   defp send_message(user_id, thing_to_say, _actions, _items) do
+  IO.puts "hi send message"
     message = %{
             "text": thing_to_say,
             "role": "appMaker"
