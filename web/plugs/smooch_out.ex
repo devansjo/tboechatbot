@@ -15,7 +15,6 @@ defmodule Tboechatbot.SmoochOut do
                       true  -> resp(conn, 204, "")
                       false -> resp(conn, 500, "Smooch unavailable or there was an error in reply")
                     end
-                     conn
             %{"response" => _}
                 ->  conn
             _   ->  resp(conn, 500, "Error processing the request")
