@@ -11,10 +11,10 @@ defmodule Tboechatbot.SmoochOut do
           case response_map do
             %{"response" => %{"user_id" => user_id, "reply" => reply}}
                 ->  #send each message in list to smooch
-#                    case Enum.all?(reply, fn(message) -> send_message(user_id, message["en_GB"], message["actions"], message["items"]) end) do
-#                      true  -> resp(conn, 204, "")
-#                      false -> resp(conn, 500, "Smooch unavailable or there was an error in reply")
-#                    end
+                    case Enum.all?(reply, fn(message) -> send_message(user_id, message["en_GB"], message["actions"], message["items"]) end) do
+                      true  -> resp(conn, 204, "")
+                      false -> resp(conn, 500, "Smooch unavailable or there was an error in reply")
+                    end
                      conn
             %{"response" => _}
                 ->  conn
