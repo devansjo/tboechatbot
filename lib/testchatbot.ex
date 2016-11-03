@@ -14,7 +14,7 @@ defmodule Tboechatbot do
       supervisor(Tboechatbot.Endpoint, []),
       # Start your own worker by calling: Tboechatbot.Worker.start_link(arg1, arg2, arg3)
       # worker(Tboechatbot.Worker, [arg1, arg2, arg3]),
-      worker(Redix, [[], [name: :redix]]),
+      worker(Redix, [Application.get_env(:redix, :url), [name: :redis]]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

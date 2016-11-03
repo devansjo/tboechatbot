@@ -159,8 +159,9 @@ defmodule Tboechatbot.ConversationRepo do
     end
 
     def save_conversation(conversation, userId) when is_map(conversation) do
+        #{:ok, conn} = start_link(Application.get_env(:redix, :url))
         bin_conversation   = :erlang.term_to_binary(conversation)
-        Redix.command!(:redix, ["SET", userId, bin_conversation])
+        Redix.command!(:redis, ["SET", userId, bin_conversation])
     end
 
     def save_conversation(reply_conversation, userId) when is_tuple(reply_conversation) do
@@ -169,7 +170,7 @@ defmodule Tboechatbot.ConversationRepo do
     end
 
     def get_conversation(userId) when is_integer(userId) do
-        bin_conversation = Redix.command!(:redix, ["GET", userId])
+        bin_conversation = Redix.command!(:redis, ["GET", userId])
         :erlang.binary_to_term(bin_conversation)
     end
 
